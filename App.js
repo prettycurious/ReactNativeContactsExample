@@ -43,8 +43,19 @@ export default class App extends Component<Props> {
                 throw err
             }else {
                 alert("添加成功")
-            };
+            }
             // save successful
+        })
+    };
+
+    getAllContacts = () => {
+        Contacts.getAll((err, contacts) => {
+            if (err === 'denied'){
+                // error
+            } else {
+                // contacts returned in Array
+                alert(JSON.stringify(contacts));//通讯录列表
+            }
         })
     };
 
@@ -104,6 +115,7 @@ export default class App extends Component<Props> {
                 </View>
                 <Button title="添加联系人" onPress={this.addContact}/>
                 <Button title="重置联系人" onPress={this.resetContact}/>
+                <Button title="获取联系人" onPress={this.getAllContacts}/>
             </View>
         );
     }
