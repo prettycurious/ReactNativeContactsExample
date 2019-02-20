@@ -1,11 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
+ * @author Winsen.Tian
+ * @date 2019-02-20
+ * @Description: react-native-contacts-example
+*/
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
@@ -22,6 +19,7 @@ export default class App extends Component<Props> {
             number: '',
             emailAddressesLabel: '',
             email: '',
+            company: ''
         };
     }
 
@@ -37,6 +35,7 @@ export default class App extends Component<Props> {
                 label: "work",
                 email: this.state.email,
             }],
+            company: this.state.company
         };
         Contacts.addContact(newPerson, (err) => {
             if (err) {
@@ -65,6 +64,7 @@ export default class App extends Component<Props> {
             givenName: "",
             number: "",
             email: "",
+            company: ''
         })
     };
 
@@ -110,6 +110,16 @@ export default class App extends Component<Props> {
                             value={this.state.email}
                             autoCapitalize='none'
                             textContentType='emailAddress'
+                        />
+                    </View>
+                    <View style={styles.itemView}>
+                        <Text style={styles.itemText}>公司：</Text>
+                        <TextInput
+                            style={styles.itemTextInput}
+                            onChangeText={(text) => this.setState({company: text})}
+                            value={this.state.company}
+                            autoCapitalize='none'
+                            textContentType='organizationName'
                         />
                     </View>
                 </View>
