@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import Contacts from 'react-native-contacts';
 
 type Props = {};
@@ -25,19 +25,7 @@ export default class App extends Component<Props> {
         };
     }
 
-    openContactForm = () => {
-        // let newPerson = {
-        //     familyName: "张",
-        //     givenName: "三",
-        //     phoneNumbers: [{
-        //         label: "mobile",
-        //         number: "(555) 555-5555",
-        //     }],
-        //     emailAddresses: [{
-        //         label: "work",
-        //         email: "mrniet@example.com",
-        //     }],
-        // };
+    addContact = () => {
         let newPerson = {
             familyName: this.state.familyName,
             givenName: this.state.givenName,
@@ -60,6 +48,15 @@ export default class App extends Component<Props> {
         })
     };
 
+    resetContact = () => {
+        this.setState({
+            familyName: "",
+            givenName: "",
+            number: "",
+            email: "",
+        })
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -67,33 +64,46 @@ export default class App extends Component<Props> {
                     <View style={styles.itemView}>
                         <Text style={styles.itemText}>姓：</Text>
                         <TextInput
-                            onChangeText={(text) => this.setState({familyName: text})}
                             style={styles.itemTextInput}
+                            onChangeText={(text) => this.setState({familyName: text})}
+                            value={this.state.familyName}
+                            autoCapitalize='none'
+                            textContentType='familyName'
                         />
                     </View>
                     <View style={styles.itemView}>
                         <Text style={styles.itemText}>名：</Text>
                         <TextInput
-                            onChangeText={(text) => this.setState({givenName: text})}
                             style={styles.itemTextInput}
+                            onChangeText={(text) => this.setState({givenName: text})}
+                            value={this.state.givenName}
+                            autoCapitalize='none'
+                            textContentType='givenName'
                         />
                     </View>
                     <View style={styles.itemView}>
                         <Text style={styles.itemText}>手机号码：</Text>
                         <TextInput
-                            onChangeText={(text) => this.setState({number: text})}
                             style={styles.itemTextInput}
+                            onChangeText={(text) => this.setState({number: text})}
+                            value={this.state.number}
+                            autoCapitalize='none'
+                            textContentType='telephoneNumber'
                         />
                     </View>
                     <View style={styles.itemView}>
                         <Text style={styles.itemText}>邮箱：</Text>
                         <TextInput
-                            onChangeText={(text) => this.setState({email: text})}
                             style={styles.itemTextInput}
+                            onChangeText={(text) => this.setState({email: text})}
+                            value={this.state.email}
+                            autoCapitalize='none'
+                            textContentType='emailAddress'
                         />
                     </View>
                 </View>
-                <Button title="添加联系人" onPress={this.openContactForm}/>
+                <Button title="添加联系人" onPress={this.addContact}/>
+                <Button title="重置联系人" onPress={this.resetContact}/>
             </View>
         );
     }
@@ -128,15 +138,5 @@ const styles = StyleSheet.create({
         height: 30,
         fontSize: 15,
         marginLeft: 15,
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 });
